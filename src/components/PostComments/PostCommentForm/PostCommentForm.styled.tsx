@@ -47,10 +47,15 @@ export const RightContainer = styled.div`
 
 export const ImageUploadButtonContainer = styled.div`
   position: relative;
-  > label {
+  label {
+    border-radius: 3px;
     cursor: pointer;
   }
-  > input {
+  &:focus-within label {
+    outline: 3px solid ${({ theme }) => theme.color.white};
+    outline-offset: ${pxToRem(2)};
+  }
+  input {
     ${a11yHidden}
   }
   svg {

@@ -19,14 +19,6 @@ export const StyledButton = styled(Button)`
 export const Container = styled.li<isParentProps>`
   margin-top: ${({ theme }) => theme.spaceSize.s};
   position: relative;
-  .give-emerald {
-    display: none;
-  }
-  .more-btn {
-    position: absolute;
-    top: ${pxToRem(9)};
-    right: ${pxToRem(9)};
-  }
 
   ${({ theme, isParent }) => `
     ${
@@ -60,9 +52,24 @@ export const Container = styled.li<isParentProps>`
 
 export const CommentContainer = styled.div`
   padding: ${pxToRem(9)} ${pxToRem(9)} ${pxToRem(8)} ${pxToRem(9)};
-  &:hover {
+
+  .more-btn {
+    display: none;
+    position: absolute;
+    top: ${pxToRem(9)};
+    right: ${pxToRem(9)};
+  }
+  .give-emerald {
+    display: none;
+  }
+
+  &:hover,
+  &:focus-within {
     border-radius: ${({ theme }) => theme.borderRadius.xxl};
     background-color: ${({ theme }) => theme.color.darkGray};
+    .more-btn {
+      display: block;
+    }
     .give-emerald {
       display: inline-flex;
       background-color: ${({ theme }) => hexToRgb(theme.color.white, 0.12)};

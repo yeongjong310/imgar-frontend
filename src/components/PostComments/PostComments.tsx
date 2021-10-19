@@ -29,7 +29,6 @@ export default React.memo(function PostComments({
   const isNext = data?.next;
 
   const handleKeyDown: KeyboardEventHandler<HTMLUListElement> = e => {
-    // e.preventDefault();
     const $target = e.target as HTMLElement;
     $target.scrollBy(0, 0);
 
