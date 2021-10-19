@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { KeyboardEventHandler, ReactElement, useState } from 'react';
 
 // types
 import { PostCommentsProps } from './PostComments.type';
@@ -28,6 +28,34 @@ export default React.memo(function PostComments({
   const { data } = usePostCommentsQuery({ postId, sort, page });
   const isNext = data?.next;
 
+  const handleKeyDown: KeyboardEventHandler<HTMLUListElement> = e => {
+    // e.preventDefault();
+    const $target = e.target as HTMLElement;
+    $target.scrollBy(0, 0);
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const $nextTarget = $target.closest('li').nextSibling as HTMLElement | null;
+
+      if ($nextTarget) {
+        $nextTarget.querySelector('a').focus();
+      } else {
+        e.currentTarget.firstElementChild.querySelector('a').focus();
+      }
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const $previousTarget = $target.closest('li').previousSibling as HTMLElement | null;
+
+      if ($previousTarget) {
+        $previousTarget.querySelector('a').focus();
+      } else {
+        e.currentTarget.lastElementChild.querySelector('a').focus();
+      }
+    }
+  };
+
   return (
     <Container className={className} id="comments">
       <PostCommentForm />
@@ -35,7 +63,7 @@ export default React.memo(function PostComments({
         <Title>{commentCount} COMMENTS</Title>
         <StyledButton text="Expand All" img={ExpandIcon} alt="Expand Icon" />
       </CommentHeader>
-      <ul>
+      <ul role="presentation" onKeyDown={handleKeyDown}>
         {data?.map(({ id, author, childrenComments, comment, dateTime, downCount, upCount, parentCommentId }) => (
           <PostComment
             aria-expanded={childrenComments ? 'true' : null}
