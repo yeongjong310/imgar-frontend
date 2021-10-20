@@ -24,13 +24,13 @@ import { usePostQuery } from '@/redux/api';
 import { useTypedSelector } from '@/redux';
 
 // etc
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import { pxToRem } from '@/util/styleUtils';
 
 export default function Gallery(): ReactElement {
   const postHeaderRef = useRef<HTMLDivElement>(null);
 
   const location = useLocation<useLocationProps>();
-  const history = useHistory();
   const param = useParams<{ id: string }>();
 
   const [postHeaderTitlePosX, setPostHeaderTitlePosX] = useState(0);
@@ -93,6 +93,9 @@ export default function Gallery(): ReactElement {
         <ExplorePostsContainer $width={masonryWidth}>
           <h3>
             <Button
+              css={`
+                width: ${pxToRem(400)};
+              `}
               className="explore-btn"
               size="large"
               backgroundColor="darkGray"
