@@ -23,7 +23,7 @@ export default function PostSideVoteBar({ className, commentCount, votePoints }:
           })
         }
       >
-        <CommentIcon title="comment" />
+        <CommentIcon title="Jump To comments" />
         {commentCount}
       </LinkToComment>
     </Container>
