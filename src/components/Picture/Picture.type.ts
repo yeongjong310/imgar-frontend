@@ -25,6 +25,7 @@ export interface PictureProps extends StyledImageProps {
   imageId?: string;
   /** img를 클릭시 호출할 핸들러를 설정할 수 있습니다. */
   onClick?: React.MouseEventHandler<HTMLImageElement>;
+  onKeyUp?: React.KeyboardEventHandler<HTMLImageElement>;
   /** hash가 아닌 image가 위치하고 있는 url(src)을 주소를 통해 데이터를 요청합니다. */
   src?: string;
   /** 이미지에 inline 스타일을 적용할 수 있습니다. */

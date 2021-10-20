@@ -11,6 +11,7 @@ const Picture = forwardRef<HTMLImageElement, PictureProps>(
       isCircle,
       imageId,
       onClick,
+      onKeyUp,
       objectFit,
       src,
       style,
@@ -65,6 +66,7 @@ const Picture = forwardRef<HTMLImageElement, PictureProps>(
               key={extension}
               loading="lazy"
               objectFit={objectFit}
+              onKeyUp={onKeyUp}
               onClick={onClick}
               ref={ref}
               style={style}
