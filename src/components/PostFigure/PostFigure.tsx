@@ -15,6 +15,7 @@ import { PostFigureProps } from './PostFigure.type';
 
 // hooks
 import useThrottle from '@/hooks/useThrottle';
+import useModal from '@/hooks/useModal';
 
 // components
 import { MoreButton, Modal } from '@/components';
@@ -32,7 +33,7 @@ export default function PostFigure({
   const imageRef = useRef<HTMLImageElement>(null);
 
   const [isZoomAble, setIsZoomAble] = useState(false);
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const { isOpen, onToggleModal } = useModal();
   const [isImageHover, setIsImageHover] = useState(false);
 
   const handleResizeObserver = useThrottle((entries: ResizeObserverEntry[]) => {
@@ -46,8 +47,10 @@ export default function PostFigure({
     }
   }, 500);
 
-  const handleToggleModal = () => {
-    setIsVisibleModal(!isVisibleModal);
+  const onOpenModalOnlyEnter: React.KeyboardEventHandler<HTMLImageElement> = e => {
+    if (e.key !== 'Enter') return;
+
+    onToggleModal();
   };
 
   useEffect(() => {
@@ -79,14 +82,13 @@ export default function PostFigure({
                 isZoomAble={isZoomAble}
                 ref={imageRef}
                 imageId={imageId}
-                onClick={isZoomAble ? handleToggleModal : null}
+                onClick={isZoomAble ? onToggleModal : null}
+                onKeyUp={isZoomAble ? onOpenModalOnlyEnter : null}
                 tabIndex={0}
               />
-              {isVisibleModal && (
-                <Modal handleHide={handleToggleModal}>
-                  <ModalPicture isVisibleModal={isVisibleModal} isZoomAble={isZoomAble} imageId={imageId} />
-                </Modal>
-              )}
+              <Modal isOpen={isOpen} handleHide={onToggleModal}>
+                <ModalPicture imageId={imageId} />
+              </Modal>
             </>
           ) : (
             <StyledVideo controls videoWidth={orgImageWidth} videoHeight={orgImageHeight} imageId={imageId} />

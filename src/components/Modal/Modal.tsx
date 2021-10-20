@@ -9,7 +9,7 @@ import { ModalProps } from './Modal.type';
 // etc
 import { createPortal } from 'react-dom';
 
-export default function Modal({ handleHide, children }: ModalProps) {
+export default function Modal({ isOpen, handleHide, children }: ModalProps) {
   const handleKeyUp = (e: KeyboardEvent) => {
     if (e.type !== 'keyup' || e.key !== 'Escape') return;
     handleHide();
@@ -23,5 +23,5 @@ export default function Modal({ handleHide, children }: ModalProps) {
     };
   }, []);
 
-  return createPortal(<StyledModal onClick={handleHide}>{children}</StyledModal>, document.body);
+  return isOpen && createPortal(<StyledModal onClick={handleHide}>{children}</StyledModal>, document.body);
 }

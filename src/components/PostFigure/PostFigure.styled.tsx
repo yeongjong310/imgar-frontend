@@ -35,14 +35,14 @@ export const StyledVideo = styled(Video)<StyledVideoProps>`
 export const StyledPicture = styled(Picture)<StyledPictureProps>`
   img {
     margin: 0 auto ${({ theme }) => theme.spaceSize.l};
-    cursor: ${({ isZoomAble, isVisibleModal }) => (isVisibleModal && 'zoom-out') || (isZoomAble && 'zoom-in')};
+    cursor: ${({ isZoomAble }) => (isZoomAble ? 'zoom-in' : '')};
     display: block;
   }
 `;
 
-export const ModalPicture = styled(Picture)<StyledPictureProps>`
+export const ModalPicture = styled(Picture)`
   img {
-    cursor: ${({ isZoomAble, isVisibleModal }) => (isVisibleModal && 'zoom-out') || (isZoomAble && 'zoom-in')};
+    cursor: zoom-out;
     display: block;
   }
 `;
