@@ -90,4 +90,4 @@ Picture.defaultProps = {
 
 Picture.displayName = 'Picture';
 
-export default Picture;
+export default React.memo(Picture);
