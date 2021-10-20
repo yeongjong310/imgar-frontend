@@ -18,7 +18,7 @@ export default function PostSideVoteBar({ className, commentCount, votePoints }:
         to="#comments"
         scroll={e =>
           window.scrollTo({
-            top: e.offsetTop + 150,
+            top: e.offsetTop,
             behavior: 'smooth',
           })
         }
